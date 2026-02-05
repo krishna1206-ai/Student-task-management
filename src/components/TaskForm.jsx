@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const TaskForm = () => {
+const TaskForm = ({addTask}) => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -48,7 +48,7 @@ const TaskForm = () => {
     e.preventDefault();
     if (validate()) {
       alert("Task Added Successfully ✅");
-      console.log(formData);
+        addTask(formData)
 
       setFormData({
         title: "",
@@ -59,7 +59,15 @@ const TaskForm = () => {
       setErrors({});
     }
   };
-
+const resetForm=()=>{
+  
+              setFormData({
+                title: "",
+                description: "",
+                date: "",
+                priority: "",
+              })
+}
   return (
     <div className="add-task-card">
       <h2 style={{ marginBottom: "15px" }}>Add New Task</h2>
@@ -132,14 +140,7 @@ const TaskForm = () => {
             type="reset"
             className="btn-secondary"
             style={{ flex: 1 }}
-            onClick={() =>
-              setFormData({
-                title: "",
-                description: "",
-                date: "",
-                priority: "",
-              })
-            }
+            onClick={resetForm }
           >
             Clean
           </button>
